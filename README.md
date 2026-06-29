@@ -2,13 +2,13 @@
 
 Coleção de scripts Batch (.bat) desenvolvidos para automatizar tarefas no Windows de forma simples e rápida.
 
-## 📋 Sobre o Projeto
+## Sobre o Projeto
 
 O **ScriptBat** reúne scripts criados para facilitar atividades do dia a dia, automatizar processos repetitivos e otimizar o uso do sistema operacional Windows. 
 
 Os scripts podem ser utilizados para manutenção, configuração, automação de tarefas e outras operações administrativas diretamente pelo terminal.
 
-## ✨ Funcionalidades
+## Funcionalidades
 
 * Automação de tarefas do Windows.
 * Execução rápida através de arquivos `.bat`.
@@ -16,12 +16,12 @@ Os scripts podem ser utilizados para manutenção, configuração, automação d
 * Sem necessidade de instalação de softwares adicionais.
 * Código simples, aberto e de fácil entendimento.
 
-## 🛠️ Tecnologias Utilizadas
+## Tecnologias Utilizadas
 
 * **Batch Script (.bat)**
 * **Windows CMD (Prompt de Comando)**
 
-## 📁 Estrutura do Projeto
+## Estrutura do Projeto
 
 ```text
 ScriptBat/
