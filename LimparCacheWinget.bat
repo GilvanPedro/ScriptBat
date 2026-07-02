@@ -19,7 +19,10 @@ echo ==========================================
 echo.
 
 echo [PROCESSO] Removendo instaladores antigos e arquivos temporários...
-winget Repair
+if exist "%TEMP%\WinGet" (
+    del /q /f /s "%TEMP%\WinGet\*" >nul 2>&1
+)
+del /q /f "%LOCALAPPDATA%\Packages\Microsoft.DesktopAppInstaller_8wekyb3d8bbwe\LocalState\DiagOutputDir\*.log" >nul 2>&1
 
 echo.
 echo [PROCESSO] Redefinindo e atualizando as fontes de pacotes...
