@@ -17,16 +17,16 @@ echo ========================================== >> "%INFO_FILE%"
 echo. >> "%INFO_FILE%"
 
 echo [PLACA-MÃE] >> "%INFO_FILE%"
-wmic baseboard get product,Manufacturer,version >> "%INFO_FILE%" 2>&1
+powershell -NoProfile -Command "Get-CimInstance Win32_BaseBoard | Format-List Product, Manufacturer, Version" >> "%INFO_FILE%" 2>&1
 
 echo [PROCESSADOR] >> "%INFO_FILE%"
-wmic cpu get name, MaxClockSpeed, NumberOfCores >> "%INFO_FILE%" 2>&1
+powershell -NoProfile -Command "Get-CimInstance Win32_Processor | Format-List Name, MaxClockSpeed, NumberOfCores" >> "%INFO_FILE%" 2>&1
 
 echo [MEMÓRIA RAM] >> "%INFO_FILE%"
-wmic memorychip get capacity, speed, DeviceLocator >> "%INFO_FILE%" 2>&1
+powershell -NoProfile -Command "Get-CimInstance Win32_PhysicalMemory | Format-List Capacity, Speed, DeviceLocator" >> "%INFO_FILE%" 2>&1
 
 echo [SISTEMA OPERACIONAL] >> "%INFO_FILE%"
-wmic os get Caption, OSArchitecture, Version >> "%INFO_FILE%" 2>&1
+powershell -NoProfile -Command "Get-CimInstance Win32_OperatingSystem | Format-List Caption, OSArchitecture, Version" >> "%INFO_FILE%" 2>&1
 
 echo.
 if %errorLevel% equ 0 (
