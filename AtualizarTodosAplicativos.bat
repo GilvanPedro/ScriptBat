@@ -1,34 +1,33 @@
 @echo off
-chcp 65001 >nul
 
 :: =======================================
-:: VERIFICAÇÃO E ELEVAÇÃO DE PRIVILÉGIOS
+:: VERIFICACAO E ELEVACAO DE PRIVILEGIOS
 :: =======================================
 net session >nul 2>&1
 if %errorLevel% neq 0 (
-    echo Solicitando privilégios de Administrador...
+    echo Solicitando privilegios de Administrador...
     powershell -NoProfile -ExecutionPolicy Bypass -Command "Start-Process '%~f0' -Verb RunAs"
     exit /b
 )
 
-title Gerenciador de Atualizações - Winget
+title Gerenciador de Atualizacoes - Winget
 cls
 echo ==========================================
-echo            BUSCANDO ATUALIZAÇÕES
+echo            BUSCANDO ATUALIZACOES
 echo ==========================================
 echo.
 
-echo [PROCESSO] Verificando se há pacotes desatualizados...
+echo [PROCESSO] Verificando se ha pacotes desatualizados...
 winget upgrade
 
 echo.
 echo ==========================================
-echo            INICIANDO ATUALIZAÇÕES
+echo            INICIANDO ATUALIZACOES
 echo ==========================================
-echo [PROCESSO] Atualizando todos os aplicativos elegíveis...
+echo [PROCESSO] Atualizando todos os aplicativos elegiveis...
 echo.
 
-:: O comando abaixo atualiza TODOS os apps do PC que possuem updates disponíveis
+:: O comando abaixo atualiza TODOS os apps do PC que possuem updates disponiveis
 winget upgrade --all --silent --include-unknown --accept-source-agreements --accept-package-agreements
 
 if %errorLevel% equ 0 (
@@ -36,7 +35,7 @@ if %errorLevel% equ 0 (
     echo [OK] Todos os aplicativos foram atualizados com sucesso!
 ) else (
     echo.
-    echo [AVISO/ERRO] Algum aplicativo pode ter falhado ou não havia atualizações (Código: %errorLevel%)
+    echo [AVISO/ERRO] Algum aplicativo pode ter falhado ou nao havia atualizacoes (Codigo: %errorLevel%)
 )
 
 echo ------------------------------------------

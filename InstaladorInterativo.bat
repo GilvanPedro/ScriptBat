@@ -1,12 +1,11 @@
 @echo off
-chcp 65001 >nul
 
 :: =======================================
-:: VERIFICAÇÃO E ELEVAÇÃO DE PRIVILÉGIOS
+:: VERIFICACAO E ELEVACAO DE PRIVILEGIOS
 :: =======================================
 net session >nul 2>&1
 if %errorLevel% neq 0 (
-    echo Solicitando privilégios de Administrador...
+    echo Solicitando privilegios de Administrador...
     powershell -NoProfile -ExecutionPolicy Bypass -Command "Start-Process '%~f0' -Verb RunAs"
     exit /b
 )
@@ -26,7 +25,7 @@ echo [5] 7-Zip
 echo [6] Sair
 echo.
 echo ==========================================
-set /p opcao="Digite o número correspondente: "
+set /p opcao="Digite o numero correspondente: "
 
 if "%opcao%"=="1" (set "app=Google.Chrome")
 if "%opcao%"=="2" (set "app=Mozilla.Firefox.pt-BR")
@@ -37,7 +36,7 @@ if "%opcao%"=="6" (exit /b)
 
 if not defined app (
     echo.
-    echo [ERRO] Opção inválida! Tente novamente.
+    echo [ERRO] Opcao invalida! Tente novamente.
     timeout /t 2 >nul
     goto menu
 )
@@ -53,7 +52,7 @@ if %errorLevel% equ 0 (
     echo [OK] %app% instalado com sucesso!
 ) else (
     echo.
-    echo [ERRO] Falha ao instalar %app% (Código: %errorLevel%)
+    echo [ERRO] Falha ao instalar %app% (Codigo: %errorLevel%)
 )
 
 set "app="
