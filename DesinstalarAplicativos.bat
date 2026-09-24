@@ -1,6 +1,8 @@
 @echo off
-chcp 65001 >nul
 
+:: =======================================
+:: VERIFICACAO E ELEVACAO DE PRIVILEGIOS
+:: =======================================
 net session >nul 2>&1
 if %errorLevel% neq 0 (
     echo Solicitando privilegios de Administrador...
@@ -8,15 +10,16 @@ if %errorLevel% neq 0 (
     exit /b
 )
 
-setlocal enabledelayedexpansion
+setlocal EnableDelayedExpansion
 
-title Gerenciador de Instalacoes - Winget
+title Gerenciador de Desinstalacoes - Winget
 cls
 echo ==========================================
 echo            INICIANDO DESINSTALACOES
 echo ==========================================
 echo.
 
+:: Obs.: o Microsoft.Edge costuma ser protegido pelo Windows e a remocao pode falhar
 set "apps=Zoom.Zoom Mozilla.Firefox VideoLAN.VLC Google.Chrome Adobe.Acrobat.Reader.64-bit 7zip.7zip Microsoft.Edge CodecGuide.K-LiteCodecPack.Standard"
 
 for %%a in (%apps%) do (

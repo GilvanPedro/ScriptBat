@@ -17,7 +17,11 @@ echo       GERANDO RELATORIO DE ATUALIZACOES
 echo ==========================================
 echo.
 
-set "REPORT_FILE=%USERPROFILE%\Desktop\Relatorio_Apps_Desatualizados.txt"
+:: Descobre a Area de Trabalho real (funciona mesmo com OneDrive redirecionando a pasta)
+for /f "usebackq delims=" %%d in (`powershell -NoProfile -Command "[Environment]::GetFolderPath('Desktop')"`) do set "DESKTOP=%%d"
+if not defined DESKTOP set "DESKTOP=%USERPROFILE%\Desktop"
+
+set "REPORT_FILE=%DESKTOP%\Relatorio_Apps_Desatualizados.txt"
 
 echo [PROCESSO] Analisando o sistema por softwares desatualizados...
 echo Gerando relatorio, por favor aguarde...
@@ -29,18 +33,20 @@ echo   Gerado em: %date% as %time% >> "%REPORT_FILE%"
 echo =================================================== >> "%REPORT_FILE%"
 echo. >> "%REPORT_FILE%"
 
-:: Exporta apenas a lista do que precisa de upgrade para o arquivo
-winget upgrade >> "%REPORT_FILE%"
+:: Exporta apenas a lista do que precisa de upgrade para o arquivo.
+:: Sem esses flags, o winget podia travar pedindo "Y" com a pergunta escondida dentro do .txt
+winget upgrade --accept-source-agreements --disable-interactivity >> "%REPORT_FILE%"
+set "CODIGO=%errorLevel%"
 
-if %errorLevel% equ 0 (
+if "%CODIGO%"=="0" (
     echo.
     echo [OK] Relatorio gerado com sucesso!
-    echo [INFO] O arquivo foi salvo na sua Area de Trabalho como:
-    echo        "Relatorio_Apps_Desatualizados.txt"
+    echo [INFO] O arquivo foi salvo em:
+    echo        "%REPORT_FILE%"
 ) else (
     echo.
-    echo [AVISO] O processo terminou (Codigo: %errorLevel%). 
-    echo Verifique o arquivo na sua Area de Trabalho.
+    echo [AVISO] O processo terminou ^(Codigo: %CODIGO%^).
+    echo Verifique o arquivo em "%REPORT_FILE%".
 )
 
 echo ------------------------------------------

@@ -26,11 +26,16 @@ Os scripts podem ser utilizados para manutenção, configuração, automação d
 ```text
 ScriptBat/
 │
-├── scripts/
-│   ├── script1.bat
-│   ├── script2.bat
-│   └── ...
-│
+├── AtualizarTodosAplicativos.bat
+├── DesinstalarAplicativos.bat
+├── ExportarListasDeAppsAtuais.bat
+├── InstaladorInterativo.bat
+├── InstalarAplicativos.bat
+├── LimparCacheWinget.bat
+├── OrganizarDownloads.bat
+├── RelatorioHardware.bat
+├── SuperPing_DNS.bat
+├── VerificarAppsQuePrecisamSerAtualizados.bat
 └── README.md
 ```
 ## Como Utilizar
@@ -42,9 +47,8 @@ ScriptBat/
    cd ScriptBat
 
 3. Execute o script desejado:
-   Você pode executar clicando duas vezes no arquivo desejado dentro da pasta scripts/ ou chamando-o diretamente pelo Prompt de Comando:
-   
-   cd scripts
+   Você pode executar clicando duas vezes no arquivo desejado ou chamando-o diretamente pelo Prompt de Comando:
+
    nome-do-script.bat
 
 Nota: Alguns scripts de manutenção ou alteração de sistema podem exigir permissões de administrador para funcionar corretamente. Se necessário, clique com o botão direito no arquivo .bat e selecione "Executar como Administrador".
@@ -65,7 +69,7 @@ Contribuições são muito bem-vindas! Se você tem um script útil e quer compa
 1. Faça um Fork do projeto.
 2. Crie uma nova Branch para sua modificação:
    git checkout -b minha-feature
-3. Faça suas alterações e salve os novos scripts na pasta scripts/.
+3. Faça suas alterações e salve os novos scripts na raiz do projeto.
 4. Faça o Commit de suas mudanças:
    git commit -m "Adiciona nova funcionalidade: nome-do-script"
 5. Envie para o GitHub (Push):

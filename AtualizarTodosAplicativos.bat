@@ -18,7 +18,8 @@ echo ==========================================
 echo.
 
 echo [PROCESSO] Verificando se ha pacotes desatualizados...
-winget upgrade
+:: --accept-source-agreements evita que o winget trave esperando um "Y" na primeira execucao
+winget upgrade --accept-source-agreements
 
 echo.
 echo ==========================================
@@ -29,13 +30,14 @@ echo.
 
 :: O comando abaixo atualiza TODOS os apps do PC que possuem updates disponiveis
 winget upgrade --all --silent --include-unknown --accept-source-agreements --accept-package-agreements
+set "CODIGO=%errorLevel%"
 
-if %errorLevel% equ 0 (
+if "%CODIGO%"=="0" (
     echo.
     echo [OK] Todos os aplicativos foram atualizados com sucesso!
 ) else (
     echo.
-    echo [AVISO/ERRO] Algum aplicativo pode ter falhado ou nao havia atualizacoes (Codigo: %errorLevel%)
+    echo [AVISO/ERRO] Algum aplicativo pode ter falhado ou nao havia atualizacoes ^(Codigo: %CODIGO%^)
 )
 
 echo ------------------------------------------

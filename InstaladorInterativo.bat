@@ -12,6 +12,9 @@ if %errorLevel% neq 0 (
 
 :menu
 title Instalador Interativo - Winget
+:: Limpa as variaveis a cada volta, senao um ENTER vazio reaproveita a escolha anterior
+set "opcao="
+set "app="
 cls
 echo ==========================================
 echo       SELECIONE O APP PARA INSTALAR
@@ -25,14 +28,14 @@ echo [5] 7-Zip
 echo [6] Sair
 echo.
 echo ==========================================
-set /p opcao="Digite o numero correspondente: "
+set /p "opcao=Digite o numero correspondente: "
 
-if "%opcao%"=="1" (set "app=Google.Chrome")
-if "%opcao%"=="2" (set "app=Mozilla.Firefox.pt-BR")
-if "%opcao%"=="3" (set "app=Microsoft.VisualStudioCode")
-if "%opcao%"=="4" (set "app=VideoLAN.VLC")
-if "%opcao%"=="5" (set "app=7zip.7zip")
-if "%opcao%"=="6" (exit /b)
+if "%opcao%"=="1" set "app=Google.Chrome"
+if "%opcao%"=="2" set "app=Mozilla.Firefox.pt-BR"
+if "%opcao%"=="3" set "app=Microsoft.VisualStudioCode"
+if "%opcao%"=="4" set "app=VideoLAN.VLC"
+if "%opcao%"=="5" set "app=7zip.7zip"
+if "%opcao%"=="6" exit /b
 
 if not defined app (
     echo.
@@ -46,16 +49,16 @@ echo ==========================================
 echo [PROCESSO] Instalando %app%...
 echo ==========================================
 winget install --id "%app%" -e --silent --accept-source-agreements --accept-package-agreements
+set "CODIGO=%errorLevel%"
 
-if %errorLevel% equ 0 (
+if "%CODIGO%"=="0" (
     echo.
     echo [OK] %app% instalado com sucesso!
 ) else (
     echo.
-    echo [ERRO] Falha ao instalar %app% (Codigo: %errorLevel%)
+    echo [ERRO] Falha ao instalar %app% ^(Codigo: %CODIGO%^)
 )
 
-set "app="
 echo.
 echo Voltando ao menu em 3 segundos...
 timeout /t 3 >nul

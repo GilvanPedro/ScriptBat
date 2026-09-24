@@ -1,5 +1,4 @@
 @echo off
-cls
 
 :: =======================================
 :: VERIFICACAO E ELEVACAO DE PRIVILEGIOS
@@ -10,6 +9,9 @@ if %errorLevel% neq 0 (
     powershell -NoProfile -ExecutionPolicy Bypass -Command "Start-Process '%~f0' -Verb RunAs"
     exit /b
 )
+
+:: Necessario para ler o errorlevel atualizado DENTRO do loop (usando !errorLevel!)
+setlocal EnableDelayedExpansion
 
 title Gerenciador de Instalacoes - Winget
 cls
@@ -28,14 +30,16 @@ set "apps=Zoom.Zoom Mozilla.Firefox.pt-BR VideoLAN.VLC Google.Chrome Adobe.Acrob
 :: =======================================
 for %%a in (%apps%) do (
     echo [PROCESSO] Tentando instalar: %%a
-    
+
     winget install --id "%%a" -e --silent --force --accept-source-agreements --accept-package-agreements
-    
-    if %errorLevel% equ 0 (
+
+    if !errorLevel! equ 0 (
         echo [OK] Sucesso ao instalar: %%a
     ) else (
-        echo [ERRO] Falha ao instalar %%a (Codigo: %errorLevel%)
+        echo [ERRO] Falha ao instalar %%a ^(Codigo: !errorLevel!^)
     )
     echo ---------------------------------------
 )
+
+endlocal
 pause
